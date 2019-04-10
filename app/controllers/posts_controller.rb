@@ -1,6 +1,9 @@
+require 'pry'
+
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
+    @users = @post.comments.map {|i| i.user }.uniq
   end
 
   def index
@@ -13,6 +16,7 @@ class PostsController < ApplicationController
 
   def create
     post = Post.create(post_params)
+    #binding.pry
     redirect_to post
   end
 
